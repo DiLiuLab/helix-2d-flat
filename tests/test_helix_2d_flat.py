@@ -1,4 +1,7 @@
 import os
+import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -63,6 +66,35 @@ class DrawingTests(unittest.TestCase):
             os.path.join("data", "seq_helix2d.svg"),
         )
         self.assertEqual(helix.derive_output_path("figure", None), "figure.svg")
+
+
+class StandaloneScriptTests(unittest.TestCase):
+    def test_script_runs_without_repository_assets(self):
+        source_script = os.path.abspath(helix.__file__)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            standalone_script = os.path.join(temp_dir, "helix_2D_flatV3.py")
+            output = os.path.join(temp_dir, "standalone.svg")
+            shutil.copy2(source_script, standalone_script)
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    standalone_script,
+                    "ACGT",
+                    "--show-base-pair-lines",
+                    "-o",
+                    output,
+                ],
+                cwd=temp_dir,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertTrue(os.path.isfile(output))
+            with open(output, encoding="utf-8") as handle:
+                self.assertIn("<svg ", handle.read())
 
 
 if __name__ == "__main__":

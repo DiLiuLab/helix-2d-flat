@@ -84,6 +84,10 @@ chmod +x helix_2D_flatV3.py
 
 This still requires Python and Tkinter on the computer.
 
+`helix_2D_flatV3.py` is intentionally self-contained and can be copied and
+run without the rest of the repository. The GUI will simply omit its custom
+icon if the `assets` directory is not present.
+
 ## Build a Standalone Application
 
 PyInstaller can create an application that users can launch without invoking
