@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+build/
+dist/
+*.spec.bak
+assets/helix_2d_flat_icon_chroma.png
+*_helix2d.svg
+helix_2D_flatV3_out.svg

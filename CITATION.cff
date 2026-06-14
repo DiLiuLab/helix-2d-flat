@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use Helix 2D Flat in your work, please cite this software."
+title: "Helix 2D Flat"
+type: software
+authors:
+  - family-names: "Liu"
+    given-names: "Di"
+repository-code: "https://github.com/DiLiuLab/helix-2d-flat"
+license: MIT
+date-released: 2026-06-14
