@@ -75,11 +75,14 @@ terminal-style controls.
 
 ## Parameter Definitions
 
-The figure below shows how the main geometry, typography, stroke, and color
-parameters map onto the drawing. `ambiguous_width` is the corresponding base
-rectangle width for IUPAC ambiguous symbols.
+The figure below is generated from the script itself and shows the main
+geometry parameters. `ambiguous_width` follows the same rectangle-width
+definition as `purine_width` and `pyrimidine_width`.
 
 ![Definitions of Helix 2D Flat drawing parameters](assets/parameter_definitions.svg)
+
+Regenerate the figure after geometry changes with
+`python3 scripts/generate_parameter_figure.py`.
 
 ## Make the Script Executable
 

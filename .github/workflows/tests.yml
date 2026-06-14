@@ -21,5 +21,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Run unit tests
         run: python -m unittest discover -s tests -v
+      - name: Verify generated parameter figure
+        run: |
+          python scripts/generate_parameter_figure.py
+          git diff --exit-code -- assets/parameter_definitions.svg
       - name: Exercise command-line SVG generation
         run: python helix_2D_flatV3.py ACGT --show-base-pair-lines -o /tmp/duplex.svg
