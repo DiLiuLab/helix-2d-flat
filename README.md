@@ -73,6 +73,14 @@ python3 helix_2D_flatV3.py AUGCUA \
 Run `python3 helix_2D_flatV3.py --help` for all geometry, color, label, and
 terminal-style controls.
 
+## Parameter Definitions
+
+The figure below shows how the main geometry, typography, stroke, and color
+parameters map onto the drawing. `ambiguous_width` is the corresponding base
+rectangle width for IUPAC ambiguous symbols.
+
+![Definitions of Helix 2D Flat drawing parameters](assets/parameter_definitions.svg)
+
 ## Make the Script Executable
 
 On macOS or Linux:
