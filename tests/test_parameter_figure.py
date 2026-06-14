@@ -1,4 +1,5 @@
 import os
+import math
 import unittest
 import xml.etree.ElementTree as ET
 
@@ -77,6 +78,46 @@ class ParameterFigureTests(unittest.TestCase):
         }
         for label in ("base_height", "row_spacing"):
             self.assertIn("rotate(-90", labels[label].attrib.get("transform", ""))
+
+    def test_sugar_radius_runs_from_true_center_to_vertex(self):
+        options = helix.DrawingOptions(
+            show_numbers=False,
+            terminal_labels=False,
+            show_base_pair_lines=False,
+            transparent=True,
+        )
+        scale = 1.2
+        offset_x = 150.0
+        offset_y = 145.0
+        row_y = helix.make_rows("AG", options)[0].y
+        expected_center = (
+            offset_x + scale * options.left_sugar_x,
+            offset_y + scale * helix.sugar_center_y(row_y, options),
+        )
+        c1 = helix.sugar_anchor("left", row_y, "C1", options)
+        expected_vertex = (
+            offset_x + scale * c1[0],
+            offset_y + scale * c1[1],
+        )
+
+        measures = self.figure.find(
+            "{}[@id='geometry-measurements']".format(tag("g"))
+        )
+        line = measures.find(
+            "{}[@id='sugar-radius-measure']".format(tag("line"))
+        )
+        self.assertIsNotNone(line)
+        start = (float(line.attrib["x1"]), float(line.attrib["y1"]))
+        end = (float(line.attrib["x2"]), float(line.attrib["y2"]))
+        self.assertAlmostEqual(start[0], expected_center[0], places=2)
+        self.assertAlmostEqual(start[1], expected_center[1], places=2)
+        self.assertAlmostEqual(end[0], expected_vertex[0], places=2)
+        self.assertAlmostEqual(end[1], expected_vertex[1], places=2)
+        self.assertAlmostEqual(
+            math.hypot(end[0] - start[0], end[1] - start[1]),
+            scale * options.sugar_radius,
+            places=2,
+        )
 
 
 if __name__ == "__main__":

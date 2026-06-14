@@ -89,9 +89,9 @@
     <circle cx="298.9557578257238" cy="220.3756987645034" r="2.6" class="center" />
     <line x1="298.96" y1="220.38" x2="331.36" y2="220.38" class="measure" />
     <text x="315.16" y="177.38" class="measure-label" text-anchor="middle">phosphate_radius</text>
-    <circle cx="354.0" cy="325.0" r="2.6" class="center" />
-    <line x1="354.00" y1="325.00" x2="384.81" y2="325.00" class="measure" />
-    <text x="369.41" y="363.00" class="measure-label" text-anchor="middle">sugar_radius</text>
+    <circle cx="354.0" cy="314.9878493822517" r="2.6" class="center" />
+    <line x1="354.00" y1="314.99" x2="384.81" y2="325.00" class="measure" id="sugar-radius-measure" />
+    <text x="369.41" y="352.99" class="measure-label" text-anchor="middle">sugar_radius</text>
   </g>
   <text x="560.00" y="620.00" class="note" text-anchor="middle">ambiguous_width follows the same rectangle-width definition for IUPAC ambiguous bases.</text>
 </svg>

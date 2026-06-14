@@ -66,15 +66,21 @@ def add_measure(
     y1: float,
     x2: float,
     y2: float,
+    element_id: str | None = None,
 ) -> None:
+    attributes = {
+        "x1": "{:.2f}".format(x1),
+        "y1": "{:.2f}".format(y1),
+        "x2": "{:.2f}".format(x2),
+        "y2": "{:.2f}".format(y2),
+        "class_": "measure",
+    }
+    if element_id is not None:
+        attributes["id"] = element_id
     add(
         parent,
         "line",
-        x1="{:.2f}".format(x1),
-        y1="{:.2f}".format(y1),
-        x2="{:.2f}".format(x2),
-        y2="{:.2f}".format(y2),
-        class_="measure",
+        **attributes,
     )
 
 
@@ -329,7 +335,7 @@ def main() -> int:
 
     # Sugar radius from its center to C1'.
     sugar_center_x = px(options.left_sugar_x)
-    sugar_center_y = py(top_row.y)
+    sugar_center_y = py(helix.sugar_center_y(top_row.y, options))
     sugar_c1 = helix.sugar_anchor("left", top_row.y, "C1", options)
     add(measures, "circle", cx=sugar_center_x, cy=sugar_center_y, r="2.6", class_="center")
     add_measure(
@@ -338,6 +344,7 @@ def main() -> int:
         sugar_center_y,
         px(sugar_c1[0]),
         py(sugar_c1[1]),
+        element_id="sugar-radius-measure",
     )
     add_text(
         measures,
